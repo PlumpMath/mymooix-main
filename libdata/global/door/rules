@@ -1,0 +1,3 @@
+check : (taking) (this) : (echo "doors are affixed")&&false
+check : (opening) (this) : exit $($library/global/data/bool/castto/number $1/locked)
+carryout : (opening) (this) : echo "false" >$1/open
