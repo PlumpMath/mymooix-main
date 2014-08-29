@@ -2,3 +2,24 @@ This is my take on the abandoned project called mooix, an attempt to
 use the functionality in any POSIX system (permissions, users, files, etc.)
 as the basis for an object-oriented gameworld.
 
+The system is devided into a number of interacting sub-systems. Firstly,
+there is the FUSE system. In general, writes will never be directly to 
+the data folder. Instead, the data folder will be proxied to the library
+folder, to allow for some smart interactions in the system. Second,
+the parser. The parser will take in a command and parse it via the rules
+in the actions folders. Third is the event system. Changes to the game
+world occur as the result of events. The simplest way to trigger an 
+event is through the successful parsing of an action. Events are then
+handled by way of rules. Rules define what scripts should be called for
+any particular event based on the arguments passed with the event. For
+example, one of the events that takes place in the processing of an
+action is a "before" event. The arguments to "before" are the action
+taking place, and any nouns that the parser has deemed relevent to the
+action. A "before" rule, then, might say that on a before event for the
+"going" action, where the first noun is a direction, call script A. Then
+another rule might say that before "taking" a door, call script B. Users
+of Inform 7 will find this eerily familiar, although I admit the syntax is
+very different. The final part of this entire set are the scripts. Scripts
+actually manipulate the game world, and since the game world is manipulated
+through the file system, nearly any popular programming language can be 
+used for scripting. 
